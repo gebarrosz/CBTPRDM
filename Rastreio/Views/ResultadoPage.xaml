@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Dupla: Luiz Felipe Gonçalves da Silva e Geovanna Barros de Assunção -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Rastreio.ViewModels"
+             xmlns:m="clr-namespace:Rastreio.Models"
+             x:Class="Rastreio.Views.ResultadoPage"
+             x:DataType="vm:ResultadoViewModel"
+             Title="Resultado"
+             BackgroundColor="#F4F6FA">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20" RowSpacing="14">
+
+        <Border Grid.Row="0" BackgroundColor="White" Padding="16" StrokeThickness="0">
+            <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+            <VerticalStackLayout Spacing="6" x:DataType="vm:ResultadoViewModel">
+                <Label Text="{Binding Pacote.Id}" FontSize="22" FontAttributes="Bold" TextColor="#1F2A44" />
+                <Label Text="{Binding Pacote.Status}" FontSize="18" TextColor="#2F6FED" FontAttributes="Bold" />
+                <Label Text="{Binding Pacote.DataEnvioTexto, StringFormat='Enviado em: {0}'}" TextColor="#5B6478" />
+                <Label Text="{Binding Pacote.PrevisaoTexto, StringFormat='Previsão de entrega: {0}'}" TextColor="#5B6478" />
+                <Label Text="{Binding Pacote.LocalizacaoAtual, StringFormat='Localização atual: {0}'}" TextColor="#5B6478" />
+            </VerticalStackLayout>
+        </Border>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="8">
+            <Label Text="Histórico de eventos" FontSize="18" FontAttributes="Bold" TextColor="#1F2A44" />
+            <CollectionView ItemsSource="{Binding Pacote.Historico}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:EventoRastreio">
+                        <Border BackgroundColor="White" Padding="12" Margin="0,4" StrokeThickness="0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="10" /></Border.StrokeShape>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Descricao}" FontAttributes="Bold" TextColor="#1F2A44" />
+                                <Label Text="{Binding Local}" TextColor="#5B6478" />
+                                <Label Text="{Binding DataTexto}" FontSize="12" TextColor="#8A93A6" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+
+        <Button Grid.Row="2" Text="Nova consulta" Command="{Binding VoltarCommand}" BackgroundColor="#2F6FED" TextColor="White" CornerRadius="10" HeightRequest="48" />
+    </Grid>
+</ContentPage>

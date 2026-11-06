@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Dupla: Luiz Felipe Gonçalves da Silva e Geovanna Barros de Assunção -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Rastreio.ViewModels"
+             x:Class="Rastreio.Views.RastreioPage"
+             x:DataType="vm:RastreioViewModel"
+             Title="Rastreio"
+             BackgroundColor="#F4F6FA">
+    <VerticalStackLayout Padding="24" Spacing="16" VerticalOptions="Center">
+        <Label Text="📦 Rastreie seu pacote" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#1F2A44" />
+        <Label Text="Digite o código de rastreamento" HorizontalOptions="Center" TextColor="#5B6478" />
+
+        <Border BackgroundColor="White" Padding="12,4" StrokeThickness="1" Stroke="#D5DAE5">
+            <Border.StrokeShape><RoundRectangle CornerRadius="10" /></Border.StrokeShape>
+            <Entry Text="{Binding Codigo}" Placeholder="Ex.: BR123456789" ReturnCommand="{Binding BuscarCommand}" />
+        </Border>
+
+        <Button Text="Rastrear" Command="{Binding BuscarCommand}" BackgroundColor="#2F6FED" TextColor="White" CornerRadius="10" HeightRequest="48" />
+        <ActivityIndicator IsRunning="{Binding Carregando}" IsVisible="{Binding Carregando}" Color="#2F6FED" />
+        <Label Text="{Binding Mensagem}" TextColor="#C0392B" HorizontalOptions="Center" />
+        <Label Text="Códigos de teste: BR123456789, BR987654321, BR555000111" FontSize="12" TextColor="#8A93A6" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+    </VerticalStackLayout>
+</ContentPage>
